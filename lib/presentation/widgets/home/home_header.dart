@@ -1,0 +1,22 @@
+import 'package:flutter/material.dart';
+
+class HomeHeader extends StatelessWidget {
+  const HomeHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: const [
+          Text(
+            "Kissan Veg Template",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          Icon(Icons.shopping_cart_outlined),
+        ],
+      ),
+    );
+  }
+}

@@ -1,0 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'config/routes/app_routes.dart';
+import 'core/router/app_router.dart';
+import 'core/themes/app_theme.dart';
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+      initialRoute: AppRoutes.splash,
+      getPages: AppRouter.getPages,
+    );
+  }
+}
