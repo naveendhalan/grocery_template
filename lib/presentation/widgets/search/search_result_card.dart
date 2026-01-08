@@ -85,7 +85,7 @@ class SearchResultCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '\$${product.price.toStringAsFixed(2)}',
+                                '₹${product.price.toStringAsFixed(2)}',
                                 style: theme.textTheme.titleMedium?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: theme.colorScheme.primary,
@@ -94,7 +94,7 @@ class SearchResultCard extends StatelessWidget {
                               if (product.mrp != null &&
                                   product.mrp! > product.price)
                                 Text(
-                                  '\$${product.mrp!.toStringAsFixed(2)}',
+                                  '₹${product.mrp!.toStringAsFixed(2)}',
                                   style: theme.textTheme.bodySmall?.copyWith(
                                     decoration: TextDecoration.lineThrough,
                                     color: theme.colorScheme.onSurface

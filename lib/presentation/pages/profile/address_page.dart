@@ -337,8 +337,8 @@ class AddressPage extends GetView<ProfileController> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        controller.deleteAddress(address.id);
                         Get.back();
+                        controller.deleteAddress(address.id);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: theme.colorScheme.error,

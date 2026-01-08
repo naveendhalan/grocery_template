@@ -20,8 +20,7 @@ class AddressCard extends StatelessWidget {
     final theme = Theme.of(context);
     final controller = Get.find<ProfileController>();
 
-    return Obx(
-      () => Container(
+    return Container(
         decoration: BoxDecoration(
           color: theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(16),
@@ -136,7 +135,6 @@ class AddressCard extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }

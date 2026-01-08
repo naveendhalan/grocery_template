@@ -65,7 +65,7 @@ class CartItemCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '\$${cartItem.product.price.toStringAsFixed(2)}',
+                      '₹${cartItem.product.price.toStringAsFixed(2)}',
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: theme.colorScheme.primary,
@@ -75,7 +75,7 @@ class CartItemCard extends StatelessWidget {
                         cartItem.product.mrp! > cartItem.product.price) ...[
                       const SizedBox(width: 8),
                       Text(
-                        '\$${cartItem.product.mrp!.toStringAsFixed(2)}',
+                        '₹${cartItem.product.mrp!.toStringAsFixed(2)}',
                         style: theme.textTheme.bodySmall?.copyWith(
                           decoration: TextDecoration.lineThrough,
                           color: theme.colorScheme.onSurface.withOpacity(0.5),

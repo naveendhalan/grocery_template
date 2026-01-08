@@ -39,37 +39,30 @@ class EditProfilePage extends GetView<ProfileController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Obx(
-                () => AuthTextField(
-                  controller: name,
-                  label: 'Name',
-                  hint: 'Enter your name',
-                  prefixIcon: Icons.person_outline,
-                ),
+              AuthTextField(
+                controller: name,
+                label: 'Name',
+                hint: 'Enter your name',
+                prefixIcon: Icons.person_outline,
               ),
               const SizedBox(height: 20),
-              Obx(
-                () => AuthTextField(
+              AuthTextField(
                   controller: email,
                   label: 'Email',
                   hint: 'Enter your email',
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: Icons.email_outlined,
                 ),
-              ),
               const SizedBox(height: 20),
-              Obx(
-                () => AuthTextField(
+              AuthTextField(
                   controller: phone,
                   label: 'Phone',
                   hint: 'Enter your phone number',
                   keyboardType: TextInputType.phone,
                   prefixIcon: Icons.phone_outlined,
                 ),
-              ),
               const SizedBox(height: 32),
-              Obx(
-                () => AuthButton(
+              AuthButton(
                   text: 'Save Changes',
                   onPressed: () {
                     controller.updateProfile(
@@ -83,7 +76,6 @@ class EditProfilePage extends GetView<ProfileController> {
                       email.value.isNotEmpty &&
                       phone.value.isNotEmpty,
                 ),
-              ),
             ],
           ),
         ),

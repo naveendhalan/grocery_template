@@ -96,7 +96,7 @@ class OrderConfirmationPage extends StatelessWidget {
                     const Divider(height: 24),
                     _InfoRow(
                       label: 'Total Amount',
-                      value: '\$${total.toStringAsFixed(2)}',
+                      value: '₹${total.toStringAsFixed(2)}',
                       theme: theme,
                       isBold: true,
                     ),

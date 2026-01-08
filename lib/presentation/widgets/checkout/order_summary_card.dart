@@ -46,7 +46,7 @@ class OrderSummaryCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '\$${controller.subtotal.toStringAsFixed(2)}',
+                  '₹${controller.subtotal.toStringAsFixed(2)}',
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onSurface,
                     fontWeight: FontWeight.w600,
@@ -65,7 +65,7 @@ class OrderSummaryCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '\$${controller.deliveryFee.toStringAsFixed(2)}',
+                  '₹${controller.deliveryFee.toStringAsFixed(2)}',
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onSurface,
                     fontWeight: FontWeight.w600,
@@ -85,7 +85,7 @@ class OrderSummaryCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '\$${controller.total.toStringAsFixed(2)}',
+                  '₹${controller.total.toStringAsFixed(2)}',
                   style: theme.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: theme.colorScheme.primary,

@@ -101,25 +101,25 @@ class SearchController extends GetxController {
     // Price filters
     const FilterEntity(
       id: 'price1',
-      name: 'Under \$30',
+      name: 'Under ₹30',
       type: FilterType.price,
       value: '0-30',
     ),
     const FilterEntity(
       id: 'price2',
-      name: '\$30 - \$50',
+      name: '₹30 - ₹50',
       type: FilterType.price,
       value: '30-50',
     ),
     const FilterEntity(
       id: 'price3',
-      name: '\$50 - \$70',
+      name: '₹50 - ₹70',
       type: FilterType.price,
       value: '50-70',
     ),
     const FilterEntity(
       id: 'price4',
-      name: 'Above \$70',
+      name: 'Above ₹70',
       type: FilterType.price,
       value: '70+',
     ),
