@@ -8,6 +8,7 @@ class ProfileController extends GetxController {
   final RxString email = 'john.doe@example.com'.obs;
   final RxString phone = '+1 234 567 8900'.obs;
   final RxString profileImage = ''.obs;
+  late RxString screenName = 'No Value'.obs;
 
   final RxList<AddressEntity> addresses = <AddressEntity>[].obs;
 
@@ -15,6 +16,7 @@ class ProfileController extends GetxController {
   void onInit() {
     super.onInit();
     _loadDemoData();
+
   }
 
   void _loadDemoData() {

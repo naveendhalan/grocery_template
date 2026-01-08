@@ -30,7 +30,7 @@ class CheckoutController extends GetxController {
     }
   }
 
-  void selectAddress(AddressEntity address) {
+  void selectAddress(AddressEntity? address) {
     selectedAddress.value = address;
   }
 

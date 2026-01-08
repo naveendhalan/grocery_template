@@ -249,6 +249,56 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () => Get.toNamed(AppRoutes.category),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: theme.colorScheme.primary,
+                  foregroundColor: theme.colorScheme.onPrimary,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 16,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 2,
+                  shadowColor: Colors.black12.withOpacity(0.08),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.person),
+                    const SizedBox(width: 8),
+                    const Text('Category'),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () => Get.toNamed(AppRoutes.orders),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: theme.colorScheme.primary,
+                  foregroundColor: theme.colorScheme.onPrimary,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 16,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 2,
+                  shadowColor: Colors.black12.withOpacity(0.08),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.person),
+                    const SizedBox(width: 8),
+                    const Text('Order'),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

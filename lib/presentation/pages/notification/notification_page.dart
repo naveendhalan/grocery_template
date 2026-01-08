@@ -17,7 +17,7 @@ class NotificationPage extends GetView<NotificationController> {
           TextButton(
             onPressed: controller.markAllAsRead,
             child: Text(
-              "Mark All",
+              "Mark All Read",
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.primary,
               ),

@@ -265,7 +265,7 @@ class AddressPage extends GetView<ProfileController> {
                             );
 
                             if (isEdit) {
-                              controller.editAddress(address!.id, newAddress);
+                              controller.editAddress(address.id, newAddress);
                             } else {
                               controller.addAddress(newAddress);
                             }

@@ -45,14 +45,12 @@ class ForgotPasswordPage extends GetView<ForgotPasswordController> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 48),
-              Obx(
-                () => AuthTextField(
-                  controller: controller.phoneOrEmail,
-                  label: 'Phone or Email',
-                  hint: 'Enter your phone or email',
-                  keyboardType: TextInputType.emailAddress,
-                  prefixIcon: Icons.phone_android_outlined,
-                ),
+              AuthTextField(
+                controller: controller.phoneOrEmail,
+                label: 'Phone or Email',
+                hint: 'Enter your phone or email',
+                keyboardType: TextInputType.emailAddress,
+                prefixIcon: Icons.phone_android_outlined,
               ),
               const SizedBox(height: 32),
               Obx(
