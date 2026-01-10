@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
+
 import '../../../config/routes/app_routes.dart';
 
 class LoginController extends GetxController {
   final RxString phoneOrEmail = ''.obs;
   final RxString password = ''.obs;
 
-  bool get isValid =>
-      phoneOrEmail.value.isNotEmpty && password.value.isNotEmpty;
+  bool get isValid => phoneOrEmail.value.isNotEmpty && password.value.isNotEmpty;
 
   void login() {
     if (isValid) {

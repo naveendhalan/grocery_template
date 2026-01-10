@@ -7,11 +7,7 @@ class HomeDataBundle {
   final List<CategoryEntity> categories;
   final List<ProductEntity> products;
 
-  HomeDataBundle({
-    required this.banners,
-    required this.categories,
-    required this.products,
-  });
+  HomeDataBundle({required this.banners, required this.categories, required this.products});
 }
 
 abstract class HomeRepository {

@@ -3,6 +3,7 @@ import 'package:grocery_template/presentation/controllers/cart/cart_binding.dart
 import 'package:grocery_template/presentation/controllers/cart/cart_controller.dart';
 import 'package:grocery_template/presentation/controllers/profile/profile_binding.dart';
 import 'package:grocery_template/presentation/controllers/profile/profile_controller.dart';
+
 import 'checkout_controller.dart';
 
 class CheckoutBinding extends Bindings {

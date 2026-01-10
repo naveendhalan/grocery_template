@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/orders/orders_controller.dart';
-import '../../widgets/orders/order_item_tile.dart';
+
 import '../../../config/routes/app_routes.dart';
 import '../../../domain/entities/order_entity.dart';
+import '../../controllers/orders/orders_controller.dart';
+import '../../widgets/orders/order_item_tile.dart';
 
 class OrderDetailPage extends GetView<OrdersController> {
   const OrderDetailPage({super.key});
@@ -37,10 +38,7 @@ class OrderDetailPage extends GetView<OrdersController> {
                       const SizedBox(height: 12),
                       Container(
                         padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.surface,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                        decoration: BoxDecoration(color: theme.colorScheme.surface, borderRadius: BorderRadius.circular(12)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -61,15 +59,7 @@ class OrderDetailPage extends GetView<OrdersController> {
                             // open review flow and pass product from first item (add support for multiple)
                             final firstItem = order.items.isNotEmpty ? order.items.first : null;
                             if (firstItem != null) {
-                              final result = await Get.toNamed(
-                                AppRoutes.reviewFlow,
-                                arguments: {
-                                  'productId': firstItem.productId,
-                                  'productName': firstItem.name,
-                                  'productImage': firstItem.image,
-                                  'orderId': order.id,
-                                },
-                              );
+                              final result = await Get.toNamed(AppRoutes.reviewFlow, arguments: {'productId': firstItem.productId, 'productName': firstItem.name, 'productImage': firstItem.image, 'orderId': order.id});
                               if (result != null) {
                                 // mark order reviewed in repository / controller
                                 controller.setOrderReviewed(order.id);
@@ -81,10 +71,7 @@ class OrderDetailPage extends GetView<OrdersController> {
                       else if (order.reviewed)
                         Container(
                           padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.surface,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
+                          decoration: BoxDecoration(color: theme.colorScheme.surface, borderRadius: BorderRadius.circular(8)),
                           child: const Text('You reviewed this order'),
                         ),
                     ],

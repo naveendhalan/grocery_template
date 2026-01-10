@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../config/routes/app_routes.dart';
 
 class ForgotPasswordController extends GetxController {
   final RxString phoneOrEmail = ''.obs;

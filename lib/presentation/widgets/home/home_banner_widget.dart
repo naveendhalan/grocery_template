@@ -12,10 +12,7 @@ class HomeBannerWidget extends StatelessWidget {
       child: PageView.builder(
         itemCount: banners.length,
         itemBuilder: (_, index) {
-          return Image.asset(
-            banners[index].imageUrl,
-            fit: BoxFit.cover,
-          );
+          return Image.asset(banners[index].imageUrl, fit: BoxFit.cover);
         },
       ),
     );

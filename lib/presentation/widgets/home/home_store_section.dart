@@ -10,13 +10,7 @@ class HomeStoreSection extends StatelessWidget {
       children: [
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          child: Text(
-            "Popular Stores",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          child: Text("Popular Stores", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         ),
 
         SizedBox(
@@ -30,10 +24,7 @@ class HomeStoreSection extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
                   color: Colors.white,
-                  image: const DecorationImage(
-                    image: AssetImage("assets/store.jpg"),
-                    fit: BoxFit.cover,
-                  ),
+                  image: const DecorationImage(image: AssetImage("assets/store.jpg"), fit: BoxFit.cover),
                 ),
               );
             },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../config/routes/app_routes.dart';
 
 class OnboardingController extends GetxController {
@@ -13,10 +14,7 @@ class OnboardingController extends GetxController {
 
   void nextPage() {
     if (currentPage.value < totalPages - 1) {
-      pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
+      pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
     } else {
       skip();
     }

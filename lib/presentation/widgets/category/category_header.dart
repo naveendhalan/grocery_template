@@ -9,13 +9,7 @@ class CategoryHeader extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Text(
-        'Shop by Category',
-        style: theme.textTheme.titleMedium?.copyWith(
-          fontWeight: FontWeight.w600,
-          fontSize: 16,
-        ),
-      ),
+      child: Text('Shop by Category', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, fontSize: 16)),
     );
   }
 }

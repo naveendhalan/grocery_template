@@ -1,21 +1,8 @@
 import '../../domain/entities/order_entity.dart';
 
 class OrderItemModel extends OrderItemEntity {
-  const OrderItemModel({
-    required String id,
-    required String productId,
-    required String name,
-    required String image,
-    required int quantity,
-    required double price,
-  }) : super(
-    id: id,
-    productId: productId,
-    name: name,
-    image: image,
-    quantity: quantity,
-    price: price,
-  );
+  const OrderItemModel({required String id, required String productId, required String name, required String image, required int quantity, required double price})
+    : super(id: id, productId: productId, name: name, image: image, quantity: quantity, price: price);
 
   factory OrderItemModel.fromMap(Map<String, dynamic> m) {
     return OrderItemModel(
@@ -28,14 +15,7 @@ class OrderItemModel extends OrderItemEntity {
     );
   }
 
-  Map<String, dynamic> toMap() => {
-    'id': id,
-    'productId': productId,
-    'name': name,
-    'image': image,
-    'quantity': quantity,
-    'price': price,
-  };
+  Map<String, dynamic> toMap() => {'id': id, 'productId': productId, 'name': name, 'image': image, 'quantity': quantity, 'price': price};
 }
 
 class OrderModel extends OrderEntity {
@@ -50,23 +30,10 @@ class OrderModel extends OrderEntity {
     required List<OrderItemModel> items,
     required String address,
     bool reviewed = false,
-  }) : super(
-    id: id,
-    status: status,
-    placedAt: placedAt,
-    deliveredAt: deliveredAt,
-    subTotal: subTotal,
-    deliveryFee: deliveryFee,
-    total: total,
-    items: items,
-    address: address,
-    reviewed: reviewed,
-  );
+  }) : super(id: id, status: status, placedAt: placedAt, deliveredAt: deliveredAt, subTotal: subTotal, deliveryFee: deliveryFee, total: total, items: items, address: address, reviewed: reviewed);
 
   factory OrderModel.fromMap(Map<String, dynamic> m) {
-    final items = (m['items'] as List<dynamic>? ?? [])
-        .map((e) => OrderItemModel.fromMap(Map<String, dynamic>.from(e)))
-        .toList();
+    final items = (m['items'] as List<dynamic>? ?? []).map((e) => OrderItemModel.fromMap(Map<String, dynamic>.from(e))).toList();
     return OrderModel(
       id: m['id']?.toString() ?? '',
       status: m['status']?.toString() ?? 'Pending',

@@ -4,10 +4,5 @@ class CategoryEntity {
   final String image;
   final String description;
 
-  const CategoryEntity({
-    required this.id,
-    required this.name,
-    required this.image,
-    required this.description,
-  });
+  const CategoryEntity({required this.id, required this.name, required this.image, required this.description});
 }

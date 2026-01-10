@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 
 class OnboardingSlide extends StatelessWidget {
-  const OnboardingSlide({
-    super.key,
-    required this.imagePath,
-    required this.title,
-    required this.subtitle,
-  });
+  const OnboardingSlide({super.key, required this.imagePath, required this.title, required this.subtitle});
 
   final String imagePath;
   final String title;
@@ -26,14 +21,7 @@ class OnboardingSlide extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12.withOpacity(0.08),
-                    blurRadius: 18,
-                    spreadRadius: 2,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
+                boxShadow: [BoxShadow(color: Colors.black12.withOpacity(0.08), blurRadius: 18, spreadRadius: 2, offset: const Offset(0, 8))],
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
@@ -43,11 +31,7 @@ class OnboardingSlide extends StatelessWidget {
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       color: theme.colorScheme.surface,
-                      child: Icon(
-                        Icons.image_not_supported,
-                        size: 100,
-                        color: theme.colorScheme.onSurface.withOpacity(0.3),
-                      ),
+                      child: Icon(Icons.image_not_supported, size: 100, color: theme.colorScheme.onSurface.withOpacity(0.3)),
                     );
                   },
                 ),
@@ -62,10 +46,7 @@ class OnboardingSlide extends StatelessWidget {
                 Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.onSurface,
-                  ),
+                  style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
                 ),
                 const SizedBox(height: 16),
                 Padding(
@@ -73,10 +54,7 @@ class OnboardingSlide extends StatelessWidget {
                   child: Text(
                     subtitle,
                     textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.7),
-                      height: 1.5,
-                    ),
+                    style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.7), height: 1.5),
                   ),
                 ),
               ],

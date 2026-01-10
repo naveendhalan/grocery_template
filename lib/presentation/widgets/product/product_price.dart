@@ -10,4 +10,3 @@ class ProductPrice extends StatelessWidget {
     throw UnimplementedError();
   }
 }
-

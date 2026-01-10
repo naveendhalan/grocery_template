@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide SearchController;
 import 'package:get/get.dart';
+
 import '../../controllers/search/search_controller.dart';
 
 class SearchTextField extends StatelessWidget {
@@ -15,14 +16,7 @@ class SearchTextField extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12..withValues(alpha: 0.08),
-            blurRadius: 18,
-            spreadRadius: 2,
-            offset: const Offset(0, 8),
-          ),
-        ],
+        boxShadow: [BoxShadow(color: Colors.black12..withValues(alpha: 0.08), blurRadius: 18, spreadRadius: 2, offset: const Offset(0, 8))],
       ),
       child: TextField(
         controller: textController,
@@ -33,10 +27,7 @@ class SearchTextField extends StatelessWidget {
           suffixIcon: Obx(
             () => controller.searchQuery.value.isNotEmpty
                 ? IconButton(
-                    icon: Icon(
-                      Icons.clear,
-                      color: theme.colorScheme.onSurface..withValues(alpha: 0.5),
-                    ),
+                    icon: Icon(Icons.clear, color: theme.colorScheme.onSurface..withValues(alpha: 0.5)),
                     onPressed: () {
                       textController.clear();
                       controller.updateQuery('');
@@ -44,16 +35,10 @@ class SearchTextField extends StatelessWidget {
                   )
                 : const SizedBox.shrink(),
           ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide.none,
-          ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
           filled: true,
           fillColor: theme.colorScheme.surface,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 16,
-          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         ),
       ),
     );

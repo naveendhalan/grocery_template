@@ -34,63 +34,17 @@ class ProductController extends GetxController {
 
   void _loadDemoProducts() {
     final List<ProductEntity> demoProducts = <ProductEntity>[
-      const ProductEntity(
-        id: 'p1',
-        name: 'Fresh Tomatoes 1kg',
-        image: 'assets/images/tomato.png',
-        price: 45,
-        mrp: 60,
-        description: 'Juicy red tomatoes perfect for salads and curries.',
-        inStock: true,
-      ),
-      const ProductEntity(
-        id: 'p2',
-        name: 'Premium Potatoes 2kg',
-        image: 'assets/images/potato.png',
-        price: 70,
-        mrp: 90,
-        description: 'Clean, starchy potatoes ideal for fries and mash.',
-        inStock: true,
-      ),
-      const ProductEntity(
-        id: 'p3',
-        name: 'Organic Carrots 500g',
-        image: 'assets/images/carrot.png',
-        price: 35,
-        mrp: 45,
-        description: 'Crunchy carrots great for snacking and juicing.',
-        inStock: true,
-      ),
-      const ProductEntity(
-        id: 'p4',
-        name: 'Green Spinach Bunch',
-        image: 'assets/images/spinach.png',
-        price: 30,
-        mrp: 40,
-        description: 'Leafy spinach rich in iron and vitamins.',
-        inStock: true,
-      ),
-      const ProductEntity(
-        id: 'p5',
-        name: 'Mixed Bell Peppers 500g',
-        image: 'assets/images/pepper.png',
-        price: 80,
-        mrp: 100,
-        description: 'Colourful peppers perfect for stir-fries and salads.',
-        inStock: true,
-      ),
+      const ProductEntity(id: 'p1', name: 'Fresh Tomatoes 1kg', image: 'assets/images/tomato.png', price: 45, mrp: 60, description: 'Juicy red tomatoes perfect for salads and curries.', inStock: true),
+      const ProductEntity(id: 'p2', name: 'Premium Potatoes 2kg', image: 'assets/images/potato.png', price: 70, mrp: 90, description: 'Clean, starchy potatoes ideal for fries and mash.', inStock: true),
+      const ProductEntity(id: 'p3', name: 'Organic Carrots 500g', image: 'assets/images/carrot.png', price: 35, mrp: 45, description: 'Crunchy carrots great for snacking and juicing.', inStock: true),
+      const ProductEntity(id: 'p4', name: 'Green Spinach Bunch', image: 'assets/images/spinach.png', price: 30, mrp: 40, description: 'Leafy spinach rich in iron and vitamins.', inStock: true),
+      const ProductEntity(id: 'p5', name: 'Mixed Bell Peppers 500g', image: 'assets/images/pepper.png', price: 80, mrp: 100, description: 'Colourful peppers perfect for stir-fries and salads.', inStock: true),
     ];
 
     // Map demo products to categories.
     _productCategory
       ..clear()
-      ..addAll(<String, String>{
-        'p1': 'Vegetables',
-        'p2': 'Vegetables',
-        'p3': 'Vegetables',
-        'p4': 'Leafy Greens',
-        'p5': 'Vegetables',
-      });
+      ..addAll(<String, String>{'p1': 'Vegetables', 'p2': 'Vegetables', 'p3': 'Vegetables', 'p4': 'Leafy Greens', 'p5': 'Vegetables'});
 
     products.assignAll(demoProducts);
 
@@ -99,28 +53,17 @@ class ProductController extends GetxController {
     uniqueCategories.assignAll(<String>['All', ...categories]);
 
     // Header / banner images.
-    productImages.assignAll(<String>[
-      'assets/images/tomato.png',
-      'assets/images/potato.png',
-      'assets/images/carrot.png',
-    ]);
+    productImages.assignAll(<String>['assets/images/tomato.png', 'assets/images/potato.png', 'assets/images/carrot.png']);
 
     _applyFilters();
   }
 
   /// Cycle sort option and apply filter.
   void applyFilter() {
-    const List<String> options = <String>[
-      'Relevance',
-      'Price: Low to High',
-      'Price: High to Low',
-      'Discount',
-    ];
+    const List<String> options = <String>['Relevance', 'Price: Low to High', 'Price: High to Low', 'Discount'];
 
     final int currentIndex = options.indexOf(selectedSort.value);
-    final int nextIndex = currentIndex == -1
-        ? 0
-        : (currentIndex + 1) % options.length;
+    final int nextIndex = currentIndex == -1 ? 0 : (currentIndex + 1) % options.length;
     selectedSort.value = options[nextIndex];
 
     _applyFilters();
@@ -133,9 +76,7 @@ class ProductController extends GetxController {
     }
 
     final int currentIndex = uniqueCategories.indexOf(selectedCategory.value);
-    final int nextIndex = currentIndex == -1
-        ? 0
-        : (currentIndex + 1) % uniqueCategories.length;
+    final int nextIndex = currentIndex == -1 ? 0 : (currentIndex + 1) % uniqueCategories.length;
 
     selectedCategory.value = uniqueCategories[nextIndex];
     _applyFilters();
@@ -147,22 +88,16 @@ class ProductController extends GetxController {
     // Category filter
     final String category = selectedCategory.value;
     if (category != 'All' && category.isNotEmpty) {
-      list = list
-          .where((ProductEntity p) => _productCategory[p.id] == category)
-          .toList();
+      list = list.where((ProductEntity p) => _productCategory[p.id] == category).toList();
     }
 
     // Sort filter
     switch (selectedSort.value) {
       case 'Price: Low to High':
-        list.sort(
-          (ProductEntity a, ProductEntity b) => a.price.compareTo(b.price),
-        );
+        list.sort((ProductEntity a, ProductEntity b) => a.price.compareTo(b.price));
         break;
       case 'Price: High to Low':
-        list.sort(
-          (ProductEntity a, ProductEntity b) => b.price.compareTo(a.price),
-        );
+        list.sort((ProductEntity a, ProductEntity b) => b.price.compareTo(a.price));
         break;
       case 'Discount':
         double discount(ProductEntity p) {
@@ -173,10 +108,7 @@ class ProductController extends GetxController {
           return (mrp - p.price) / mrp;
         }
 
-        list.sort(
-          (ProductEntity a, ProductEntity b) =>
-              discount(b).compareTo(discount(a)),
-        );
+        list.sort((ProductEntity a, ProductEntity b) => discount(b).compareTo(discount(a)));
         break;
       case 'Relevance':
       default:

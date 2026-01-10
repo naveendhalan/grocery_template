@@ -10,10 +10,7 @@ class HomeHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: const [
-          Text(
-            "Kissan Veg Template",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
+          Text("Kissan Veg Template", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           Icon(Icons.shopping_cart_outlined),
         ],
       ),

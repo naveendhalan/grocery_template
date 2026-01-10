@@ -8,22 +8,13 @@ class ProductVegBadge extends StatelessWidget {
     return Container(
       width: 18,
       height: 18,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        color: Color(0xFF2AAF6D),
-      ),
+      decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF2AAF6D)),
       alignment: Alignment.center,
       child: Container(
         width: 8,
         height: 8,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-        ),
+        decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
       ),
     );
   }
 }
-
-
-

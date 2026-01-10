@@ -12,10 +12,6 @@ class HomeRepositoryImpl implements HomeRepository {
     final categories = await remote.getCategories();
     final products = await remote.getProducts();
 
-    return HomeDataBundle(
-      banners: banners,
-      categories: categories,
-      products: products,
-    );
+    return HomeDataBundle(banners: banners, categories: categories, products: products);
   }
 }

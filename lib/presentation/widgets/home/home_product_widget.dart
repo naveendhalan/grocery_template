@@ -11,19 +11,10 @@ class HomeProductWidget extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: products.length,
-      gridDelegate:
-      const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (_, index) {
         final p = products[index];
-        return Card(
-          child: Column(
-            children: [
-              Image.asset(p.image, height: 80),
-              Text(p.name),
-              Text("₹${p.price}"),
-            ],
-          ),
-        );
+        return Card(child: Column(children: [Image.asset(p.image, height: 80), Text(p.name), Text("₹${p.price}")]));
       },
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../controllers/onboarding/onboarding_controller.dart';
 
 class OnboardingProgressDots extends StatelessWidget {
@@ -19,12 +20,7 @@ class OnboardingProgressDots extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 4),
             width: index == controller.currentPage.value ? 24 : 8,
             height: 8,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: index == controller.currentPage.value
-                  ? theme.colorScheme.primary
-                  : theme.colorScheme.primary.withOpacity(0.3),
-            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: index == controller.currentPage.value ? theme.colorScheme.primary : theme.colorScheme.primary.withOpacity(0.3)),
           ),
         ),
       ),

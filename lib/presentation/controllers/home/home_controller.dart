@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../../../domain/usecases/home/get_home_data.dart';
 
 class HomeController extends GetxController {

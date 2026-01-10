@@ -9,27 +9,15 @@ class CategoryBinding extends Bindings {
   @override
   void dependencies() {
     // Data source
-    Get.lazyPut<CategoryLocalDataSource>(
-      () => CategoryLocalDataSource(),
-      fenix: true,
-    );
+    Get.lazyPut<CategoryLocalDataSource>(() => CategoryLocalDataSource(), fenix: true);
 
     // Repository
-    Get.lazyPut<CategoryRepositoryImpl>(
-      () => CategoryRepositoryImpl(Get.find<CategoryLocalDataSource>()),
-      fenix: true,
-    );
+    Get.lazyPut<CategoryRepositoryImpl>(() => CategoryRepositoryImpl(Get.find<CategoryLocalDataSource>()), fenix: true);
 
     // Usecase
-    Get.lazyPut<GetCategoriesUseCase>(
-      () => GetCategoriesUseCase(Get.find<CategoryRepositoryImpl>()),
-      fenix: true,
-    );
+    Get.lazyPut<GetCategoriesUseCase>(() => GetCategoriesUseCase(Get.find<CategoryRepositoryImpl>()), fenix: true);
 
     // Controller
-    Get.lazyPut<CategoryController>(
-      () => CategoryController(Get.find<GetCategoriesUseCase>()),
-      fenix: true,
-    );
+    Get.lazyPut<CategoryController>(() => CategoryController(Get.find<GetCategoriesUseCase>()), fenix: true);
   }
 }

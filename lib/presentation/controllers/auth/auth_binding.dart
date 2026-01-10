@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
+
+import 'forgot_password_controller.dart';
 import 'login_controller.dart';
 import 'otp_controller.dart';
-import 'forgot_password_controller.dart';
 
 class AuthBinding extends Bindings {
   @override

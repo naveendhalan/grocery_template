@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
+
+import '../../../config/routes/app_routes.dart';
 import '../../../domain/entities/address_entity.dart';
 import '../../controllers/cart/cart_controller.dart';
 import '../../controllers/profile/profile_controller.dart';
-import '../../../config/routes/app_routes.dart';
 
 enum PaymentMethod { cash, card, upi }
 
@@ -22,10 +23,7 @@ class CheckoutController extends GetxController {
 
   void _loadDefaultAddress() {
     if (profileController.addresses.isNotEmpty) {
-      final defaultAddress = profileController.addresses.firstWhere(
-        (addr) => addr.isDefault,
-        orElse: () => profileController.addresses.first,
-      );
+      final defaultAddress = profileController.addresses.firstWhere((addr) => addr.isDefault, orElse: () => profileController.addresses.first);
       selectedAddress.value = defaultAddress;
     }
   }
@@ -39,7 +37,9 @@ class CheckoutController extends GetxController {
   }
 
   double get subtotal => cartController.subtotal;
+
   double get deliveryFee => cartController.deliveryFee;
+
   double get total => cartController.total;
 
   bool get canPlaceOrder {
@@ -56,14 +56,6 @@ class CheckoutController extends GetxController {
     cartController.clearCart();
 
     // Navigate to order confirmation
-    Get.offNamed(
-      AppRoutes.orderConfirmation,
-      arguments: {
-        'orderId': orderId.value,
-        'address': selectedAddress.value,
-        'paymentMethod': selectedPaymentMethod.value,
-        'total': total,
-      },
-    );
+    Get.offNamed(AppRoutes.orderConfirmation, arguments: {'orderId': orderId.value, 'address': selectedAddress.value, 'paymentMethod': selectedPaymentMethod.value, 'total': total});
   }
 }

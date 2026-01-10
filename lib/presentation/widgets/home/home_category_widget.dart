@@ -15,11 +15,8 @@ class HomeCategoryWidget extends StatelessWidget {
         itemBuilder: (_, i) {
           return Column(
             children: [
-              CircleAvatar(
-                radius: 30,
-                backgroundImage: AssetImage(categories[i].image),
-              ),
-              Text(categories[i].title)
+              CircleAvatar(radius: 30, backgroundImage: AssetImage(categories[i].image)),
+              Text(categories[i].title),
             ],
           );
         },

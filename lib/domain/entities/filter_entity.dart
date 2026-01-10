@@ -6,10 +6,5 @@ class FilterEntity {
   final FilterType type;
   final String? value;
 
-  const FilterEntity({
-    required this.id,
-    required this.name,
-    required this.type,
-    this.value,
-  });
+  const FilterEntity({required this.id, required this.name, required this.type, this.value});
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../domain/entities/address_entity.dart';
 import '../../controllers/profile/profile_controller.dart';
 import '../../widgets/profile/address_card.dart';
-import '../../../domain/entities/address_entity.dart';
-import '../../../config/routes/app_routes.dart';
 
 class AddressPage extends GetView<ProfileController> {
   const AddressPage({super.key});
@@ -17,10 +17,7 @@ class AddressPage extends GetView<ProfileController> {
       appBar: AppBar(
         title: Text(
           'Manage Addresses',
-          style: theme.textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: theme.colorScheme.onSurface,
-          ),
+          style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
         ),
         backgroundColor: theme.colorScheme.surface,
         elevation: 0,
@@ -38,32 +35,17 @@ class AddressPage extends GetView<ProfileController> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.location_off,
-                        size: 64,
-                        color: theme.colorScheme.onSurface.withOpacity(0.3),
-                      ),
+                      Icon(Icons.location_off, size: 64, color: theme.colorScheme.onSurface.withOpacity(0.3)),
                       const SizedBox(height: 16),
-                      Text(
-                        'No addresses added yet',
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: theme.colorScheme.onSurface.withOpacity(0.6),
-                        ),
-                      ),
+                      Text('No addresses added yet', style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.6))),
                       const SizedBox(height: 24),
                       ElevatedButton(
-                        onPressed: () =>
-                            _showAddEditAddressDialog(context, null),
+                        onPressed: () => _showAddEditAddressDialog(context, null),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: theme.colorScheme.primary,
                           foregroundColor: theme.colorScheme.onPrimary,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 12,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         ),
                         child: const Text('Add Address'),
                       ),
@@ -77,12 +59,7 @@ class AddressPage extends GetView<ProfileController> {
                     final address = controller.addresses[index];
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 12),
-                      child: AddressCard(
-                        address: address,
-                        onEdit: () =>
-                            _showAddEditAddressDialog(context, address),
-                        onDelete: () => _showDeleteDialog(context, address),
-                      ),
+                      child: AddressCard(address: address, onEdit: () => _showAddEditAddressDialog(context, address), onDelete: () => _showDeleteDialog(context, address)),
                     );
                   },
                 ),
@@ -96,17 +73,11 @@ class AddressPage extends GetView<ProfileController> {
     final isEdit = address != null;
 
     final titleController = TextEditingController(text: address?.title ?? '');
-    final addressLine1Controller = TextEditingController(
-      text: address?.addressLine1 ?? '',
-    );
-    final addressLine2Controller = TextEditingController(
-      text: address?.addressLine2 ?? '',
-    );
+    final addressLine1Controller = TextEditingController(text: address?.addressLine1 ?? '');
+    final addressLine2Controller = TextEditingController(text: address?.addressLine2 ?? '');
     final cityController = TextEditingController(text: address?.city ?? '');
     final stateController = TextEditingController(text: address?.state ?? '');
-    final pincodeController = TextEditingController(
-      text: address?.pincode ?? '',
-    );
+    final pincodeController = TextEditingController(text: address?.pincode ?? '');
     final phoneController = TextEditingController(text: address?.phone ?? '');
     final isDefault = (address?.isDefault ?? false).obs;
 
@@ -122,19 +93,14 @@ class AddressPage extends GetView<ProfileController> {
               children: [
                 Text(
                   isEdit ? 'Edit Address' : 'Add Address',
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.onSurface,
-                  ),
+                  style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
                 ),
                 const SizedBox(height: 24),
                 TextField(
                   controller: titleController,
                   decoration: InputDecoration(
                     labelText: 'Title (e.g., Home, Office)',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -142,9 +108,7 @@ class AddressPage extends GetView<ProfileController> {
                   controller: addressLine1Controller,
                   decoration: InputDecoration(
                     labelText: 'Address Line 1',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -152,9 +116,7 @@ class AddressPage extends GetView<ProfileController> {
                   controller: addressLine2Controller,
                   decoration: InputDecoration(
                     labelText: 'Address Line 2',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -165,9 +127,7 @@ class AddressPage extends GetView<ProfileController> {
                         controller: cityController,
                         decoration: InputDecoration(
                           labelText: 'City',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                         ),
                       ),
                     ),
@@ -177,9 +137,7 @@ class AddressPage extends GetView<ProfileController> {
                         controller: stateController,
                         decoration: InputDecoration(
                           labelText: 'State',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                         ),
                       ),
                     ),
@@ -193,9 +151,7 @@ class AddressPage extends GetView<ProfileController> {
                         controller: pincodeController,
                         decoration: InputDecoration(
                           labelText: 'Pincode',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                         ),
                       ),
                     ),
@@ -205,9 +161,7 @@ class AddressPage extends GetView<ProfileController> {
                         controller: phoneController,
                         decoration: InputDecoration(
                           labelText: 'Phone',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                         ),
                       ),
                     ),
@@ -219,9 +173,7 @@ class AddressPage extends GetView<ProfileController> {
                     title: const Text('Set as default address'),
                     value: isDefault.value,
                     onChanged: (value) => isDefault.value = value ?? false,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -232,9 +184,7 @@ class AddressPage extends GetView<ProfileController> {
                         onPressed: () => Get.back(),
                         style: TextButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         ),
                         child: const Text('Cancel'),
                       ),
@@ -250,10 +200,7 @@ class AddressPage extends GetView<ProfileController> {
                               pincodeController.text.isNotEmpty &&
                               phoneController.text.isNotEmpty) {
                             final newAddress = AddressEntity(
-                              id:
-                                  address?.id ??
-                                  DateTime.now().millisecondsSinceEpoch
-                                      .toString(),
+                              id: address?.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
                               title: titleController.text,
                               addressLine1: addressLine1Controller.text,
                               addressLine2: addressLine2Controller.text,
@@ -275,9 +222,7 @@ class AddressPage extends GetView<ProfileController> {
                           backgroundColor: theme.colorScheme.primary,
                           foregroundColor: theme.colorScheme.onPrimary,
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         ),
                         child: Text(isEdit ? 'Update' : 'Add'),
                       ),
@@ -306,18 +251,10 @@ class AddressPage extends GetView<ProfileController> {
             children: [
               Text(
                 'Delete Address',
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: theme.colorScheme.onSurface,
-                ),
+                style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
               ),
               const SizedBox(height: 16),
-              Text(
-                'Are you sure you want to delete "${address.title}" address?',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.7),
-                ),
-              ),
+              Text('Are you sure you want to delete "${address.title}" address?', style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.7))),
               const SizedBox(height: 24),
               Row(
                 children: [
@@ -326,9 +263,7 @@ class AddressPage extends GetView<ProfileController> {
                       onPressed: () => Get.back(),
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 12),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                       ),
                       child: const Text('Cancel'),
                     ),
@@ -344,9 +279,7 @@ class AddressPage extends GetView<ProfileController> {
                         backgroundColor: theme.colorScheme.error,
                         foregroundColor: theme.colorScheme.onError,
                         padding: const EdgeInsets.symmetric(vertical: 12),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                       ),
                       child: const Text('Delete'),
                     ),

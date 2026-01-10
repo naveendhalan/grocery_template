@@ -1,17 +1,14 @@
 import 'package:get/get.dart';
+
 import '../../../domain/entities/order_entity.dart';
-import '../../../domain/usecases/get_orders_usecase.dart';
 import '../../../domain/usecases/get_order_detail_usecase.dart';
-import '../../../domain/repositories/order_repository.dart';
+import '../../../domain/usecases/get_orders_usecase.dart';
 
 class OrdersController extends GetxController {
   final GetOrdersUseCase getOrdersUseCase;
   final GetOrderDetailUseCase getOrderDetailUseCase;
 
-  OrdersController({
-    required this.getOrdersUseCase,
-    required this.getOrderDetailUseCase,
-  });
+  OrdersController({required this.getOrdersUseCase, required this.getOrderDetailUseCase});
 
   final RxBool isLoading = false.obs;
   final RxList<OrderEntity> orders = <OrderEntity>[].obs;

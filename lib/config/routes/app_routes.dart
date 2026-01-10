@@ -21,6 +21,4 @@ class AppRoutes {
   static const String reviewFlow = '/review-flow';
   static const String orders = '/orders';
   static const String orderDetail = '/order-detail';
-
-
 }

@@ -39,7 +39,7 @@ class CheckoutAddressCard extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () async {
-                    final AddressEntity address= await Get.toNamed(AppRoutes.address, arguments: "Check Out");
+                    final AddressEntity address = await Get.toNamed(AppRoutes.address, arguments: "Check Out");
                     controller.selectAddress(address);
                   },
                   child: Text(

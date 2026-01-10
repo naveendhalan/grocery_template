@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../domain/entities/product/product_entity.dart';
+
 import '../../../config/routes/app_routes.dart';
-import '../../controllers/wishlist/wishlist_controller.dart';
+import '../../../domain/entities/product/product_entity.dart';
 import '../../controllers/wishlist/wishlist_binding.dart';
+import '../../controllers/wishlist/wishlist_controller.dart';
 
 class SearchResultCard extends StatelessWidget {
   const SearchResultCard({super.key, required this.product});
@@ -28,14 +29,7 @@ class SearchResultCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12.withOpacity(0.08),
-              blurRadius: 18,
-              spreadRadius: 2,
-              offset: const Offset(0, 8),
-            ),
-          ],
+          boxShadow: [BoxShadow(color: Colors.black12.withOpacity(0.08), blurRadius: 18, spreadRadius: 2, offset: const Offset(0, 8))],
         ),
         child: Stack(
           children: [
@@ -43,9 +37,7 @@ class SearchResultCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(16),
-                  ),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
                   child: Container(
                     height: 150,
                     width: double.infinity,
@@ -54,11 +46,7 @@ class SearchResultCard extends StatelessWidget {
                       product.image,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
-                        return Icon(
-                          Icons.image_not_supported,
-                          size: 50,
-                          color: theme.colorScheme.onSurface.withOpacity(0.3),
-                        );
+                        return Icon(Icons.image_not_supported, size: 50, color: theme.colorScheme.onSurface.withOpacity(0.3));
                       },
                     ),
                   ),
@@ -70,10 +58,7 @@ class SearchResultCard extends StatelessWidget {
                     children: [
                       Text(
                         product.name,
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: theme.colorScheme.onSurface,
-                        ),
+                        style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600, color: theme.colorScheme.onSurface),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -86,37 +71,22 @@ class SearchResultCard extends StatelessWidget {
                             children: [
                               Text(
                                 '₹${product.price.toStringAsFixed(2)}',
-                                style: theme.textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: theme.colorScheme.primary,
-                                ),
+                                style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.primary),
                               ),
-                              if (product.mrp != null &&
-                                  product.mrp! > product.price)
+                              if (product.mrp != null && product.mrp! > product.price)
                                 Text(
                                   '₹${product.mrp!.toStringAsFixed(2)}',
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    decoration: TextDecoration.lineThrough,
-                                    color: theme.colorScheme.onSurface
-                                        .withOpacity(0.5),
-                                  ),
+                                  style: theme.textTheme.bodySmall?.copyWith(decoration: TextDecoration.lineThrough, color: theme.colorScheme.onSurface.withOpacity(0.5)),
                                 ),
                             ],
                           ),
                           Row(
                             children: [
-                              Icon(
-                                Icons.star,
-                                size: 16,
-                                color: theme.colorScheme.primary,
-                              ),
+                              Icon(Icons.star, size: 16, color: theme.colorScheme.primary),
                               const SizedBox(width: 4),
                               Text(
                                 '4.5',
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  color: theme.colorScheme.onSurface,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurface, fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
@@ -134,21 +104,12 @@ class SearchResultCard extends StatelessWidget {
                 final wishlistController = Get.find<WishlistController>();
                 final isFavorite = wishlistController.isInWishlist(product);
                 return IconButton(
-                  icon: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: isFavorite
-                        ? theme.colorScheme.error
-                        : theme.colorScheme.onSurface.withOpacity(0.6),
-                    size: 20,
-                  ),
+                  icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border, color: isFavorite ? theme.colorScheme.error : theme.colorScheme.onSurface.withOpacity(0.6), size: 20),
                   onPressed: () {
                     wishlistController.toggleWishlist(product);
                   },
                   padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(
-                    minWidth: 32,
-                    minHeight: 32,
-                  ),
+                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
                 );
               }),
             ),

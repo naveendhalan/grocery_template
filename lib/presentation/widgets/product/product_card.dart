@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../domain/entities/product/product_entity.dart';
+
 import '../../../config/routes/app_routes.dart';
-import '../../controllers/wishlist/wishlist_controller.dart';
+import '../../../domain/entities/product/product_entity.dart';
 import '../../controllers/wishlist/wishlist_binding.dart';
+import '../../controllers/wishlist/wishlist_controller.dart';
 import 'product_discount_badge.dart';
 import 'product_image.dart';
 import 'product_price_row.dart';
@@ -39,35 +40,24 @@ class ProductCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black12.withOpacity(0.08),
-              blurRadius: 18,
-              spreadRadius: 2,
-              offset: const Offset(0, 8),
-            ),
-          ],
+          boxShadow: <BoxShadow>[BoxShadow(color: Colors.black12.withOpacity(0.08), blurRadius: 18, spreadRadius: 2, offset: const Offset(0, 8))],
         ),
         child: Stack(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   ProductImage(imageUrl: product.image),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 4),
                   Text(
                     product.name,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                      color: theme.colorScheme.onSurface,
-                    ),
+                    style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600, fontSize: 14, color: theme.colorScheme.onSurface),
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 2),
                   ProductPriceRow(price: price, mrp: mrp),
                 ],
               ),
@@ -80,30 +70,16 @@ class ProductCard extends StatelessWidget {
                 final wishlistController = Get.find<WishlistController>();
                 final isFavorite = wishlistController.isInWishlist(product);
                 return IconButton(
-                  icon: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: isFavorite
-                        ? theme.colorScheme.error
-                        : theme.colorScheme.onSurface.withOpacity(0.6),
-                    size: 20,
-                  ),
+                  icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border, color: isFavorite ? theme.colorScheme.error : theme.colorScheme.onSurface.withOpacity(0.6), size: 20),
                   onPressed: () {
                     wishlistController.toggleWishlist(product);
                   },
                   padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(
-                    minWidth: 32,
-                    minHeight: 32,
-                  ),
+                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
                 );
               }),
             ),
-            if (discount > 0)
-              Positioned(
-                top: 40,
-                right: 8,
-                child: ProductDiscountBadge(discount: discount),
-              ),
+            if (discount > 0) Positioned(top: 40, right: 8, child: ProductDiscountBadge(discount: discount)),
           ],
         ),
       ),

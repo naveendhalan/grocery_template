@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../domain/entities/address_entity.dart';
+
 import '../../../config/routes/app_routes.dart';
+import '../../../domain/entities/address_entity.dart';
 
 class ProfileController extends GetxController {
   final RxString name = 'John Doe'.obs;
@@ -16,41 +17,16 @@ class ProfileController extends GetxController {
   void onInit() {
     super.onInit();
     _loadDemoData();
-
   }
 
   void _loadDemoData() {
     addresses.assignAll([
-      AddressEntity(
-        id: '1',
-        title: 'Home',
-        addressLine1: '123 Main Street',
-        addressLine2: 'Apartment 4B',
-        city: 'New York',
-        state: 'NY',
-        pincode: '10001',
-        phone: '+1 234 567 8900',
-        isDefault: true,
-      ),
-      AddressEntity(
-        id: '2',
-        title: 'Office',
-        addressLine1: '456 Business Ave',
-        addressLine2: 'Suite 200',
-        city: 'New York',
-        state: 'NY',
-        pincode: '10002',
-        phone: '+1 234 567 8901',
-        isDefault: false,
-      ),
+      AddressEntity(id: '1', title: 'Home', addressLine1: '123 Main Street', addressLine2: 'Apartment 4B', city: 'New York', state: 'NY', pincode: '10001', phone: '+1 234 567 8900', isDefault: true),
+      AddressEntity(id: '2', title: 'Office', addressLine1: '456 Business Ave', addressLine2: 'Suite 200', city: 'New York', state: 'NY', pincode: '10002', phone: '+1 234 567 8901', isDefault: false),
     ]);
   }
 
-  void updateProfile({
-    required String newName,
-    required String newEmail,
-    required String newPhone,
-  }) {
+  void updateProfile({required String newName, required String newEmail, required String newPhone}) {
     name.value = newName;
     email.value = newEmail;
     phone.value = newPhone;

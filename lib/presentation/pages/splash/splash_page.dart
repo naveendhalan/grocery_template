@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+
 import '../../../config/routes/app_routes.dart';
 
 class SplashPage extends StatefulWidget {
@@ -49,11 +50,7 @@ class _SplashPageState extends State<SplashPage> {
                 child: Image.asset(
                   'assets/images/logo.png',
                   errorBuilder: (context, error, stackTrace) {
-                    return Icon(
-                      Icons.shopping_cart,
-                      size: 100,
-                      color: theme.colorScheme.onSurface.withOpacity(0.3),
-                    );
+                    return Icon(Icons.shopping_cart, size: 100, color: theme.colorScheme.onSurface.withOpacity(0.3));
                   },
                 ),
               ),
@@ -62,21 +59,9 @@ class _SplashPageState extends State<SplashPage> {
               padding: const EdgeInsets.only(bottom: 32.0),
               child: Column(
                 children: [
-                  Text(
-                    'Designed & Developed by: Naveen Chaudhary',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      fontSize: 12,
-                      color: theme.colorScheme.onSurface.withOpacity(0.6),
-                    ),
-                  ),
+                  Text('Designed & Developed by: Naveen Chaudhary', style: theme.textTheme.bodySmall?.copyWith(fontSize: 12, color: theme.colorScheme.onSurface.withOpacity(0.6))),
                   const SizedBox(height: 4),
-                  Text(
-                    'Version: $_version($_buildNumber)',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      fontSize: 12,
-                      color: theme.colorScheme.onSurface.withOpacity(0.6),
-                    ),
-                  ),
+                  Text('Version: $_version($_buildNumber)', style: theme.textTheme.bodySmall?.copyWith(fontSize: 12, color: theme.colorScheme.onSurface.withOpacity(0.6))),
                 ],
               ),
             ),

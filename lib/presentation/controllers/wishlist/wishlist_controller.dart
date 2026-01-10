@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../domain/entities/product/product_entity.dart';
 
 class WishlistController extends GetxController {
@@ -14,15 +15,7 @@ class WishlistController extends GetxController {
   void _loadDemoData() {
     // Demo wishlist items
     wishlistItems.assignAll([
-      const ProductEntity(
-        id: 'p1',
-        name: 'Fresh Tomatoes 1kg',
-        image: 'assets/images/tomato.png',
-        price: 45,
-        mrp: 60,
-        description: 'Juicy red tomatoes perfect for salads and curries.',
-        inStock: true,
-      ),
+      const ProductEntity(id: 'p1', name: 'Fresh Tomatoes 1kg', image: 'assets/images/tomato.png', price: 45, mrp: 60, description: 'Juicy red tomatoes perfect for salads and curries.', inStock: true),
     ]);
   }
 

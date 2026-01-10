@@ -6,13 +6,7 @@ class ReviewTextField extends StatelessWidget {
   final int maxLines;
   final ValueChanged<String>? onChanged;
 
-  const ReviewTextField({
-    super.key,
-    required this.controller,
-    this.hint = 'Write your review...',
-    this.maxLines = 5,
-    this.onChanged,
-  });
+  const ReviewTextField({super.key, required this.controller, this.hint = 'Write your review...', this.maxLines = 5, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +19,7 @@ class ReviewTextField extends StatelessWidget {
         hintText: hint,
         filled: true,
         fillColor: theme.colorScheme.surface,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide.none,
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
       ),
     );
   }

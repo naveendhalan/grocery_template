@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../domain/entities/address_entity.dart';
+
 import '../../../config/routes/app_routes.dart';
+import '../../../domain/entities/address_entity.dart';
 import '../../controllers/checkout/checkout_controller.dart' show PaymentMethod;
 
 class OrderConfirmationPage extends StatelessWidget {
@@ -40,66 +41,34 @@ class OrderConfirmationPage extends StatelessWidget {
               Container(
                 width: 100,
                 height: 100,
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primaryContainer,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.check_circle,
-                  size: 60,
-                  color: theme.colorScheme.onPrimaryContainer,
-                ),
+                decoration: BoxDecoration(color: theme.colorScheme.primaryContainer, shape: BoxShape.circle),
+                child: Icon(Icons.check_circle, size: 60, color: theme.colorScheme.onPrimaryContainer),
               ),
               const SizedBox(height: 24),
               Text(
                 'Order Placed Successfully!',
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: theme.colorScheme.onSurface,
-                ),
+                style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
               Text(
                 'Your order has been confirmed',
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.7),
-                ),
+                style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.7)),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),
               Container(
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(16),
-                ),
+                decoration: BoxDecoration(color: theme.colorScheme.surfaceContainerHighest, borderRadius: BorderRadius.circular(16)),
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     _InfoRow(label: 'Order ID', value: orderId, theme: theme),
                     const Divider(height: 24),
-                    if (address != null) ...[
-                      _InfoRow(
-                        label: 'Delivery Address',
-                        value: address.fullAddress,
-                        theme: theme,
-                        isMultiline: true,
-                      ),
-                      const Divider(height: 24),
-                    ],
-                    _InfoRow(
-                      label: 'Payment Method',
-                      value: getPaymentMethodName(paymentMethod),
-                      theme: theme,
-                    ),
+                    if (address != null) ...[_InfoRow(label: 'Delivery Address', value: address.fullAddress, theme: theme, isMultiline: true), const Divider(height: 24)],
+                    _InfoRow(label: 'Payment Method', value: getPaymentMethodName(paymentMethod), theme: theme),
                     const Divider(height: 24),
-                    _InfoRow(
-                      label: 'Total Amount',
-                      value: '₹${total.toStringAsFixed(2)}',
-                      theme: theme,
-                      isBold: true,
-                    ),
+                    _InfoRow(label: 'Total Amount', value: '₹${total.toStringAsFixed(2)}', theme: theme, isBold: true),
                   ],
                 ),
               ),
@@ -112,18 +81,13 @@ class OrderConfirmationPage extends StatelessWidget {
                     backgroundColor: theme.colorScheme.primary,
                     foregroundColor: theme.colorScheme.onPrimary,
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     elevation: 2,
                     shadowColor: Colors.black12.withOpacity(0.08),
                   ),
                   child: Text(
                     'Continue Shopping',
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.onPrimary,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onPrimary, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -136,13 +100,7 @@ class OrderConfirmationPage extends StatelessWidget {
 }
 
 class _InfoRow extends StatelessWidget {
-  const _InfoRow({
-    required this.label,
-    required this.value,
-    required this.theme,
-    this.isMultiline = false,
-    this.isBold = false,
-  });
+  const _InfoRow({required this.label, required this.value, required this.theme, this.isMultiline = false, this.isBold = false});
 
   final String label;
   final String value;
@@ -155,20 +113,11 @@ class _InfoRow extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: theme.colorScheme.onSurface.withOpacity(0.6),
-          ),
-        ),
+        Text(label, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.6))),
         const SizedBox(height: 4),
         Text(
           value,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-            color: theme.colorScheme.onSurface,
-            height: isMultiline ? 1.5 : 1.0,
-          ),
+          style: theme.textTheme.bodyMedium?.copyWith(fontWeight: isBold ? FontWeight.bold : FontWeight.normal, color: theme.colorScheme.onSurface, height: isMultiline ? 1.5 : 1.0),
         ),
       ],
     );

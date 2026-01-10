@@ -6,13 +6,7 @@ class StarRating extends StatelessWidget {
   final ValueChanged<int> onChanged;
   final double size;
 
-  const StarRating({
-    super.key,
-    required this.value,
-    required this.onChanged,
-    this.maxStars = 5,
-    this.size = 32,
-  });
+  const StarRating({super.key, required this.value, required this.onChanged, this.maxStars = 5, this.size = 32});
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +18,7 @@ class StarRating extends StatelessWidget {
         return IconButton(
           padding: EdgeInsets.zero,
           constraints: BoxConstraints.tight(Size(size, size)),
-          icon: Icon(
-            idx <= value ? Icons.star : Icons.star_border,
-            size: size,
-            color: theme.colorScheme.primary,
-          ),
+          icon: Icon(idx <= value ? Icons.star : Icons.star_border, size: size, color: theme.colorScheme.primary),
           onPressed: () => onChanged(idx),
         );
       }),

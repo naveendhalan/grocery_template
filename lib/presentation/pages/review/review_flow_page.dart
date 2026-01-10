@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../controllers/review/review_controller.dart';
-import '../../widgets/review/star_rating.dart';
-import '../../widgets/review/review_text_field.dart';
 import '../../widgets/review/image_picker_widget.dart';
+import '../../widgets/review/review_text_field.dart';
+import '../../widgets/review/star_rating.dart';
 
 class ReviewFlowPage extends GetView<ReviewController> {
   const ReviewFlowPage({super.key});
@@ -19,10 +20,7 @@ class ReviewFlowPage extends GetView<ReviewController> {
           final s = controller.step.value;
           return Text('Write a Review - Step $s/4');
         }),
-        leading: IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () => Get.back(),
-        ),
+        leading: IconButton(icon: const Icon(Icons.close), onPressed: () => Get.back()),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -40,15 +38,11 @@ class ReviewFlowPage extends GetView<ReviewController> {
                     decoration: BoxDecoration(
                       color: theme.colorScheme.surface,
                       borderRadius: BorderRadius.circular(12),
-                      image: controller.productImage.isNotEmpty
-                          ? DecorationImage(image: NetworkImage(controller.productImage), fit: BoxFit.cover)
-                          : null,
+                      image: controller.productImage.isNotEmpty ? DecorationImage(image: NetworkImage(controller.productImage), fit: BoxFit.cover) : null,
                     ),
                   ),
                   const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(controller.productName, style: theme.textTheme.titleMedium),
-                  )
+                  Expanded(child: Text(controller.productName, style: theme.textTheme.titleMedium)),
                 ],
               ),
               const SizedBox(height: 20),
@@ -57,27 +51,15 @@ class ReviewFlowPage extends GetView<ReviewController> {
               if (step == 1) ...[
                 Text('Rate the product', style: theme.textTheme.titleMedium),
                 const SizedBox(height: 12),
-                StarRating(
-                  value: controller.rating.value,
-                  onChanged: (v) => controller.setRating(v),
-                ),
+                StarRating(value: controller.rating.value, onChanged: (v) => controller.setRating(v)),
               ] else if (step == 2) ...[
                 Text('Write your review', style: theme.textTheme.titleMedium),
                 const SizedBox(height: 12),
-                ReviewTextField(
-                  controller: textController,
-                  onChanged: (t) => controller.setReviewText(t),
-                ),
+                ReviewTextField(controller: textController, onChanged: (t) => controller.setReviewText(t)),
               ] else if (step == 3) ...[
                 Text('Add photos (optional)', style: theme.textTheme.titleMedium),
                 const SizedBox(height: 12),
-                ImagePickerWidget(
-                  images: controller.imagePaths.toList(),
-                  onPickFromGallery: controller.addImageFromGallery,
-                  onPickFromCamera: controller.addImageFromCamera,
-                  onRemove: (i) => controller.removeImageAt(i),
-                ),
-
+                ImagePickerWidget(images: controller.imagePaths.toList(), onPickFromGallery: controller.addImageFromGallery, onPickFromCamera: controller.addImageFromCamera, onRemove: (i) => controller.removeImageAt(i)),
               ] else if (step == 4) ...[
                 Text('Preview & Submit', style: theme.textTheme.titleMedium),
                 const SizedBox(height: 12),
@@ -87,10 +69,7 @@ class ReviewFlowPage extends GetView<ReviewController> {
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
-                  children: controller.imagePaths.map((p) => SizedBox(
-                    width: 80, height: 80,
-                    child: Image.asset(p, fit: BoxFit.cover),
-                  )).toList(),
+                  children: controller.imagePaths.map((p) => SizedBox(width: 80, height: 80, child: Image.asset(p, fit: BoxFit.cover))).toList(),
                 ),
               ],
 
@@ -102,11 +81,7 @@ class ReviewFlowPage extends GetView<ReviewController> {
                   if (!controller.isFirstStep)
                     Expanded(
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: theme.colorScheme.surface,
-                          foregroundColor: theme.colorScheme.onSurface,
-                          elevation: 0,
-                        ),
+                        style: ElevatedButton.styleFrom(backgroundColor: theme.colorScheme.surface, foregroundColor: theme.colorScheme.onSurface, elevation: 0),
                         onPressed: controller.prevStep,
                         child: const Text('Back'),
                       ),

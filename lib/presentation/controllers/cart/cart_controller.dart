@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../../../domain/entities/cart_item_entity.dart';
 import '../../../domain/entities/product/product_entity.dart';
 
@@ -16,28 +17,12 @@ class CartController extends GetxController {
     cartItems.assignAll([
       CartItemEntity(
         id: '1',
-        product: const ProductEntity(
-          id: '1',
-          name: 'Fresh Tomatoes',
-          image: 'assets/images/product1.png',
-          price: 2.99,
-          mrp: 3.99,
-          description: 'Fresh red tomatoes',
-          inStock: true,
-        ),
+        product: const ProductEntity(id: '1', name: 'Fresh Tomatoes', image: 'assets/images/product1.png', price: 2.99, mrp: 3.99, description: 'Fresh red tomatoes', inStock: true),
         quantity: 2,
       ),
       CartItemEntity(
         id: '2',
-        product: const ProductEntity(
-          id: '2',
-          name: 'Organic Carrots',
-          image: 'assets/images/product2.png',
-          price: 1.99,
-          mrp: null,
-          description: 'Fresh organic carrots',
-          inStock: true,
-        ),
+        product: const ProductEntity(id: '2', name: 'Organic Carrots', image: 'assets/images/product2.png', price: 1.99, mrp: null, description: 'Fresh organic carrots', inStock: true),
         quantity: 1,
       ),
     ]);
@@ -56,25 +41,13 @@ class CartController extends GetxController {
   }
 
   void addItem(ProductEntity product) {
-    final existingItemIndex = cartItems.indexWhere(
-      (item) => item.product.id == product.id,
-    );
+    final existingItemIndex = cartItems.indexWhere((item) => item.product.id == product.id);
 
     if (existingItemIndex != -1) {
       final existingItem = cartItems[existingItemIndex];
-      cartItems[existingItemIndex] = CartItemEntity(
-        id: existingItem.id,
-        product: existingItem.product,
-        quantity: existingItem.quantity + 1,
-      );
+      cartItems[existingItemIndex] = CartItemEntity(id: existingItem.id, product: existingItem.product, quantity: existingItem.quantity + 1);
     } else {
-      cartItems.add(
-        CartItemEntity(
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
-          product: product,
-          quantity: 1,
-        ),
-      );
+      cartItems.add(CartItemEntity(id: DateTime.now().millisecondsSinceEpoch.toString(), product: product, quantity: 1));
     }
   }
 
@@ -91,11 +64,7 @@ class CartController extends GetxController {
     final index = cartItems.indexWhere((item) => item.id == itemId);
     if (index != -1) {
       final item = cartItems[index];
-      cartItems[index] = CartItemEntity(
-        id: item.id,
-        product: item.product,
-        quantity: newQuantity,
-      );
+      cartItems[index] = CartItemEntity(id: item.id, product: item.product, quantity: newQuantity);
     }
   }
 

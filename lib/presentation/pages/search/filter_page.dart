@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart' hide SearchController;
 import 'package:get/get.dart';
-import '../../controllers/search/search_controller.dart';
-import '../../widgets/search/filter_chip.dart';
-import '../../widgets/search/apply_filters_button.dart';
+
 import '../../../domain/entities/filter_entity.dart';
+import '../../controllers/search/search_controller.dart';
+import '../../widgets/search/apply_filters_button.dart';
+import '../../widgets/search/filter_chip.dart';
 
 class FilterPage extends GetView<SearchController> {
   const FilterPage({super.key});
@@ -17,10 +18,7 @@ class FilterPage extends GetView<SearchController> {
       appBar: AppBar(
         title: Text(
           'Filters',
-          style: theme.textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: theme.colorScheme.onSurface,
-          ),
+          style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
         ),
         backgroundColor: theme.colorScheme.surface,
         elevation: 0,
@@ -29,10 +27,7 @@ class FilterPage extends GetView<SearchController> {
             onPressed: controller.clearFilters,
             child: Text(
               'Clear All',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.primary,
-                fontWeight: FontWeight.w600,
-              ),
+              style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.primary, fontWeight: FontWeight.w600),
             ),
           ),
         ],
@@ -46,26 +41,11 @@ class FilterPage extends GetView<SearchController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _FilterSection(
-                      title: 'Category',
-                      filters: controller.availableFilters
-                          .where((f) => f.type == FilterType.category)
-                          .toList(),
-                    ),
+                    _FilterSection(title: 'Category', filters: controller.availableFilters.where((f) => f.type == FilterType.category).toList()),
                     const SizedBox(height: 24),
-                    _FilterSection(
-                      title: 'Price Range',
-                      filters: controller.availableFilters
-                          .where((f) => f.type == FilterType.price)
-                          .toList(),
-                    ),
+                    _FilterSection(title: 'Price Range', filters: controller.availableFilters.where((f) => f.type == FilterType.price).toList()),
                     const SizedBox(height: 24),
-                    _FilterSection(
-                      title: 'Rating',
-                      filters: controller.availableFilters
-                          .where((f) => f.type == FilterType.rating)
-                          .toList(),
-                    ),
+                    _FilterSection(title: 'Rating', filters: controller.availableFilters.where((f) => f.type == FilterType.rating).toList()),
                   ],
                 ),
               ),
@@ -74,14 +54,7 @@ class FilterPage extends GetView<SearchController> {
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: theme.colorScheme.surface,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12.withValues(alpha: 0.08),
-                    blurRadius: 18,
-                    spreadRadius: 2,
-                    offset: const Offset(0, -8),
-                  ),
-                ],
+                boxShadow: [BoxShadow(color: Colors.black12.withValues(alpha: 0.08), blurRadius: 18, spreadRadius: 2, offset: const Offset(0, -8))],
               ),
               child: const ApplyFiltersButton(),
             ),
@@ -107,19 +80,10 @@ class _FilterSection extends StatelessWidget {
       children: [
         Text(
           title,
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: theme.colorScheme.onSurface,
-          ),
+          style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
         ),
         const SizedBox(height: 12),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: filters
-              .map((filter) => FilterChipWidget(filter: filter))
-              .toList(),
-        ),
+        Wrap(spacing: 8, runSpacing: 8, children: filters.map((filter) => FilterChipWidget(filter: filter)).toList()),
       ],
     );
   }

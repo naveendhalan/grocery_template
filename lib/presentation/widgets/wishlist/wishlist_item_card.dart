@@ -26,16 +26,13 @@ class WishlistItemCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [BoxShadow(color: Colors.black12.withOpacity(0.08), blurRadius: 18, spreadRadius: 2, offset: const Offset(0, 8))],
         ),
-        child:
-        Stack(
+        child: Stack(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(16),
-                  ),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
                   child: Container(
                     height: 150,
                     width: double.infinity,
@@ -44,11 +41,7 @@ class WishlistItemCard extends StatelessWidget {
                       product.image,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
-                        return Icon(
-                          Icons.image_not_supported,
-                          size: 50,
-                          color: theme.colorScheme.onSurface.withOpacity(0.3),
-                        );
+                        return Icon(Icons.image_not_supported, size: 50, color: theme.colorScheme.onSurface.withOpacity(0.3));
                       },
                     ),
                   ),
@@ -60,10 +53,7 @@ class WishlistItemCard extends StatelessWidget {
                     children: [
                       Text(
                         product.name,
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: theme.colorScheme.onSurface,
-                        ),
+                        style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600, color: theme.colorScheme.onSurface),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -76,20 +66,12 @@ class WishlistItemCard extends StatelessWidget {
                             children: [
                               Text(
                                 '₹${product.price.toStringAsFixed(2)}',
-                                style: theme.textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: theme.colorScheme.primary,
-                                ),
+                                style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.primary),
                               ),
-                              if (product.mrp != null &&
-                                  product.mrp! > product.price)
+                              if (product.mrp != null && product.mrp! > product.price)
                                 Text(
                                   '₹${product.mrp!.toStringAsFixed(2)}',
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    decoration: TextDecoration.lineThrough,
-                                    color: theme.colorScheme.onSurface
-                                        .withOpacity(0.5),
-                                  ),
+                                  style: theme.textTheme.bodySmall?.copyWith(decoration: TextDecoration.lineThrough, color: theme.colorScheme.onSurface.withOpacity(0.5)),
                                 ),
                             ],
                           ),
@@ -105,19 +87,9 @@ class WishlistItemCard extends StatelessWidget {
               right: 8,
               child: Obx(
                 () => IconButton(
-                  icon: Icon(
-                    controller.isInWishlist(product)
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    color: controller.isInWishlist(product)
-                        ? theme.colorScheme.error
-                        : theme.colorScheme.onSurface.withOpacity(0.6),
-                  ),
+                  icon: Icon(controller.isInWishlist(product) ? Icons.favorite : Icons.favorite_border, color: controller.isInWishlist(product) ? theme.colorScheme.error : theme.colorScheme.onSurface.withOpacity(0.6)),
                   onPressed: () => controller.toggleWishlist(product),
-                  style: IconButton.styleFrom(
-                    backgroundColor: theme.colorScheme.surface,
-                    padding: const EdgeInsets.all(8),
-                  ),
+                  style: IconButton.styleFrom(backgroundColor: theme.colorScheme.surface, padding: const EdgeInsets.all(8)),
                 ),
               ),
             ),

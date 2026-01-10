@@ -4,10 +4,7 @@ import '../../../domain/entities/product/product_entity.dart';
 import 'product_card.dart';
 
 class ProductGrid extends StatelessWidget {
-  const ProductGrid({
-    super.key,
-    required this.products,
-  });
+  const ProductGrid({super.key, required this.products});
 
   final List<ProductEntity> products;
 
@@ -20,12 +17,7 @@ class ProductGrid extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 14,
-        childAspectRatio: 0.66,
-      ),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 14, childAspectRatio: 0.66),
       itemCount: products.length,
       itemBuilder: (BuildContext context, int index) {
         return ProductCard(product: products[index]);
@@ -33,6 +25,3 @@ class ProductGrid extends StatelessWidget {
     );
   }
 }
-
-
-

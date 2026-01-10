@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class ImagePickerWidget extends StatelessWidget {
@@ -7,13 +8,7 @@ class ImagePickerWidget extends StatelessWidget {
   final VoidCallback onPickFromCamera;
   final ValueChanged<int> onRemove;
 
-  const ImagePickerWidget({
-    super.key,
-    required this.images,
-    required this.onPickFromGallery,
-    required this.onPickFromCamera,
-    required this.onRemove,
-  });
+  const ImagePickerWidget({super.key, required this.images, required this.onPickFromGallery, required this.onPickFromCamera, required this.onRemove});
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +30,7 @@ class ImagePickerWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: theme.colorScheme.surface,
                       borderRadius: BorderRadius.circular(12),
-                      image: DecorationImage(
-                        image: FileImage(File(images[i])),
-                        fit: BoxFit.cover,
-                      ),
+                      image: DecorationImage(image: FileImage(File(images[i])), fit: BoxFit.cover),
                     ),
                   ),
                   Positioned(
@@ -47,10 +39,7 @@ class ImagePickerWidget extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () => onRemove(i),
                       child: Container(
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.surface,
-                          shape: BoxShape.circle,
-                        ),
+                        decoration: BoxDecoration(color: theme.colorScheme.surface, shape: BoxShape.circle),
                         child: const Icon(Icons.close, size: 18),
                       ),
                     ),
@@ -68,9 +57,7 @@ class ImagePickerWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: theme.colorScheme.surface,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: theme.colorScheme.primary.withOpacity(0.3),
-                  ),
+                  border: Border.all(color: theme.colorScheme.primary.withOpacity(0.3)),
                 ),
                 child: Icon(Icons.add_a_photo, color: theme.colorScheme.primary),
               ),

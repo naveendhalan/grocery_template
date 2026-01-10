@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/product/product_controller.dart';
-import '../../controllers/cart/cart_controller.dart';
+import '../../../config/routes/app_routes.dart';
 import '../../controllers/cart/cart_binding.dart';
+import '../../controllers/cart/cart_controller.dart';
+import '../../controllers/product/product_controller.dart';
 import '../../widgets/product/product_grid.dart';
 import '../../widgets/product/product_header.dart';
 import '../../widgets/product/product_sort_filter_bar.dart';
-import '../../../config/routes/app_routes.dart';
 
 /// Product listing page – Day 2 layout placeholder.
 ///
@@ -35,10 +35,7 @@ class ProductPage extends GetView<ProductController> {
             return Stack(
               children: [
                 IconButton(
-                  icon: Icon(
-                    Icons.shopping_cart_outlined,
-                    color: theme.colorScheme.onSurface,
-                  ),
+                  icon: Icon(Icons.shopping_cart_outlined, color: theme.colorScheme.onSurface),
                   onPressed: () => Get.toNamed(AppRoutes.cart),
                 ),
                 if (cartController.totalItems > 0)
@@ -47,21 +44,11 @@ class ProductPage extends GetView<ProductController> {
                     top: 8,
                     child: Container(
                       padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.error,
-                        shape: BoxShape.circle,
-                      ),
-                      constraints: const BoxConstraints(
-                        minWidth: 16,
-                        minHeight: 16,
-                      ),
+                      decoration: BoxDecoration(color: theme.colorScheme.error, shape: BoxShape.circle),
+                      constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
                       child: Text(
                         '${cartController.totalItems}',
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.onError,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onError, fontSize: 10, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -79,28 +66,13 @@ class ProductPage extends GetView<ProductController> {
             slivers: <Widget>[
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 12,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const <Widget>[
-                      ProductHeader(),
-                      SizedBox(height: 12),
-                      ProductSortFilterBar(),
-                    ],
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: const <Widget>[ProductHeader(), SizedBox(height: 12), ProductSortFilterBar()]),
                 ),
               ),
               SliverPadding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                sliver: SliverToBoxAdapter(
-                  child: ProductGrid(products: products),
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                sliver: SliverToBoxAdapter(child: ProductGrid(products: products)),
               ),
             ],
           );

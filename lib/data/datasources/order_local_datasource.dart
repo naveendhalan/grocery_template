@@ -1,5 +1,3 @@
-import 'package:flutter/services.dart' show rootBundle;
-import 'dart:convert';
 import '../models/order_model.dart';
 
 class OrderLocalDataSource {
@@ -18,22 +16,8 @@ class OrderLocalDataSource {
         deliveryFee: 20.0,
         total: 470.0,
         items: [
-          const OrderItemModel(
-            id: 'oi1',
-            productId: 'p1',
-            name: 'Fresh Tomatoes 1kg',
-            image: 'assets/images/tomato.png',
-            quantity: 2,
-            price: 45.0,
-          ),
-          const OrderItemModel(
-            id: 'oi2',
-            productId: 'p2',
-            name: 'Premium Potatoes 2kg',
-            image: 'assets/images/potato.png',
-            quantity: 1,
-            price: 70.0,
-          ),
+          const OrderItemModel(id: 'oi1', productId: 'p1', name: 'Fresh Tomatoes 1kg', image: 'assets/images/tomato.png', quantity: 2, price: 45.0),
+          const OrderItemModel(id: 'oi2', productId: 'p2', name: 'Premium Potatoes 2kg', image: 'assets/images/potato.png', quantity: 1, price: 70.0),
         ],
         address: 'House 12, MG Road, City',
         reviewed: false,
@@ -46,16 +30,7 @@ class OrderLocalDataSource {
         subTotal: 250.0,
         deliveryFee: 20.0,
         total: 270.0,
-        items: [
-          const OrderItemModel(
-            id: 'oi3',
-            productId: 'p3',
-            name: 'Organic Carrots 500g',
-            image: 'assets/images/carrot.png',
-            quantity: 2,
-            price: 35.0,
-          ),
-        ],
+        items: [const OrderItemModel(id: 'oi3', productId: 'p3', name: 'Organic Carrots 500g', image: 'assets/images/carrot.png', quantity: 2, price: 35.0)],
         address: 'Flat 3B, Lajpat Nagar',
         reviewed: false,
       ),

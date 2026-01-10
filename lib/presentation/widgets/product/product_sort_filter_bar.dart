@@ -15,14 +15,7 @@ class ProductSortFilterBar extends GetView<ProductController> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black12.withOpacity(0.08),
-            blurRadius: 18,
-            spreadRadius: 2,
-            offset: const Offset(0, 8),
-          ),
-        ],
+        boxShadow: <BoxShadow>[BoxShadow(color: Colors.black12.withOpacity(0.08), blurRadius: 18, spreadRadius: 2, offset: const Offset(0, 8))],
       ),
       child: Row(
         children: <Widget>[
@@ -32,18 +25,9 @@ class ProductSortFilterBar extends GetView<ProductController> {
               child: Obx(
                 () => Row(
                   children: <Widget>[
-                    Text(
-                      'Sort: ${controller.selectedSort.value}',
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                      ),
-                    ),
+                    Text('Sort: ${controller.selectedSort.value}', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600, fontSize: 14)),
                     const SizedBox(width: 4),
-                    const Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      size: 18,
-                    ),
+                    const Icon(Icons.keyboard_arrow_down_rounded, size: 18),
                   ],
                 ),
               ),
@@ -54,19 +38,9 @@ class ProductSortFilterBar extends GetView<ProductController> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Icon(
-                  Icons.filter_list_rounded,
-                  size: 18,
-                  color: theme.primaryColor,
-                ),
+                Icon(Icons.filter_list_rounded, size: 18, color: theme.primaryColor),
                 const SizedBox(width: 4),
-                Text(
-                  'Filter',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                  ),
-                ),
+                Text('Filter', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600, fontSize: 14)),
               ],
             ),
           ),
@@ -75,6 +49,3 @@ class ProductSortFilterBar extends GetView<ProductController> {
     );
   }
 }
-
-
-

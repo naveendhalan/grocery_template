@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../domain/entities/review_entity.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../../domain/entities/review_entity.dart';
 
 class ReviewController extends GetxController {
   // Inputs/state for the multi-step flow
@@ -37,6 +37,7 @@ class ReviewController extends GetxController {
   }
 
   bool get isLastStep => step.value == 4;
+
   bool get isFirstStep => step.value == 1;
 
   void nextStep() {
@@ -48,11 +49,8 @@ class ReviewController extends GetxController {
   }
 
   void setRating(int r) => rating.value = r;
+
   void setReviewText(String t) => reviewText.value = t;
-
-
-
-
 
   Future<void> addImageFromGallery() async {
     if (imagePaths.length >= 4) {
@@ -78,7 +76,6 @@ class ReviewController extends GetxController {
     }
   }
 
-
   void removeImageAt(int index) {
     if (index >= 0 && index < imagePaths.length) imagePaths.removeAt(index);
   }
@@ -94,15 +91,7 @@ class ReviewController extends GetxController {
     // Simulate delay
     await Future<void>.delayed(const Duration(seconds: 1));
 
-    final review = ReviewEntity(
-      productId: productId,
-      productName: productName,
-      productImage: productImage,
-      rating: rating.value,
-      reviewText: reviewText.value,
-      imagePaths: [...imagePaths],
-      createdAt: DateTime.now(),
-    );
+    final review = ReviewEntity(productId: productId, productName: productName, productImage: productImage, rating: rating.value, reviewText: reviewText.value, imagePaths: [...imagePaths], createdAt: DateTime.now());
 
     // In a real app: send to backend. Here we just show success and return to Orders
     isSubmitting.value = false;

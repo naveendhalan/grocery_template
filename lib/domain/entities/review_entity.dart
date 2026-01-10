@@ -7,13 +7,5 @@ class ReviewEntity {
   final List<String> imagePaths; // local paths or base64 strings for template
   final DateTime createdAt;
 
-  ReviewEntity({
-    required this.productId,
-    required this.productName,
-    required this.productImage,
-    required this.rating,
-    required this.reviewText,
-    required this.imagePaths,
-    required this.createdAt,
-  });
+  ReviewEntity({required this.productId, required this.productName, required this.productImage, required this.rating, required this.reviewText, required this.imagePaths, required this.createdAt});
 }

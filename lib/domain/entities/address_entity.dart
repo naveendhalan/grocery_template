@@ -21,6 +21,5 @@ class AddressEntity {
     this.isDefault = false,
   });
 
-  String get fullAddress =>
-      '$addressLine1, $addressLine2, $city, $state - $pincode';
+  String get fullAddress => '$addressLine1, $addressLine2, $city, $state - $pincode';
 }
