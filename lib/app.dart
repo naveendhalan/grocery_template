@@ -10,6 +10,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(debugShowCheckedModeBanner: false, theme: AppTheme.lightTheme, initialRoute: AppRoutes.splash, getPages: AppRouter.getPages);
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+      initialRoute: AppRoutes.splash,
+      getPages: AppRouter.getPages,
+    );
   }
 }

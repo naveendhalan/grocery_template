@@ -5,6 +5,7 @@ import '../../presentation/controllers/auth/auth_binding.dart';
 import '../../presentation/controllers/cart/cart_binding.dart';
 import '../../presentation/controllers/category/category_binding.dart';
 import '../../presentation/controllers/checkout/checkout_binding.dart';
+import '../../presentation/controllers/home/home_binding.dart';
 import '../../presentation/controllers/notification/notification_binding.dart';
 import '../../presentation/controllers/onboarding/onboarding_binding.dart';
 import '../../presentation/controllers/orders/orders_binding.dart';
@@ -43,7 +44,7 @@ class AppRouter {
     GetPage(name: AppRoutes.login, page: () => const LoginPage(), binding: AuthBinding()),
     GetPage(name: AppRoutes.otp, page: () => const OtpPage(), binding: AuthBinding()),
     GetPage(name: AppRoutes.forgotPassword, page: () => const ForgotPasswordPage(), binding: AuthBinding()),
-    GetPage(name: AppRoutes.home, page: () => const HomePage()),
+    GetPage(name: AppRoutes.home, page: () => const HomePage(), binding: HomeBinding()),
     GetPage(name: AppRoutes.profile, page: () => const ProfilePage(), binding: ProfileBinding()),
     GetPage(name: AppRoutes.editProfile, page: () => const EditProfilePage(), binding: ProfileBinding()),
     GetPage(name: AppRoutes.address, page: () => const AddressPage(), binding: ProfileBinding()),

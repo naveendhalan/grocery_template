@@ -1,6 +1,6 @@
 import '../../models/banner_model.dart';
-import '../../models/category_model.dart';
-import '../../models/product_model.dart';
+import '../../models/category/category_model.dart';
+import '../../models/product/product_model.dart';
 
 class HomeRemoteDataSource {
   Future<List<BannerModel>> getBanners() async {
@@ -9,13 +9,16 @@ class HomeRemoteDataSource {
   }
 
   Future<List<CategoryModel>> getCategories() async {
-    return [CategoryModel(id: "1", title: "Vegetables", image: "assets/images/veg.png"), CategoryModel(id: "2", title: "Fruits", image: "assets/images/fruits.png")];
+    return [
+      const CategoryModel(id: "1", name: "Vegetables", image: "assets/images/veg.png", description: "Fresh vegetables"),
+      const CategoryModel(id: "2", name: "Fruits", image: "assets/images/fruits.png", description: "Fresh fruits"),
+    ];
   }
 
   Future<List<ProductModel>> getProducts() async {
     return [
-      ProductModel(id: "101", name: "Potato", image: "assets/images/potato.png", description: "High-quality potatoes, ideal for frying, boiling, or baking.", price: 20, rating: 4.2),
-      ProductModel(id: "102", name: "Tomato", image: "assets/images/tomato.png", description: "Fresh, juicy organic tomatoes picked from local farms.", price: 30, rating: 4.5),
+      const ProductModel(id: "101", name: "Potato", image: "assets/images/potato.png", price: 20, mrp: 25, description: "High-quality potatoes, ideal for frying, boiling, or baking.", inStock: true),
+      const ProductModel(id: "102", name: "Tomato", image: "assets/images/tomato.png", price: 30, mrp: 35, description: "Fresh, juicy organic tomatoes picked from local farms.", inStock: true),
     ];
   }
 }

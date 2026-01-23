@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/entities/address_entity.dart';
+import '../../controllers/checkout/checkout_controller.dart';
 import '../../controllers/profile/profile_controller.dart';
 
 class AddressCard extends StatelessWidget {
@@ -20,7 +21,13 @@ class AddressCard extends StatelessWidget {
     }
     return InkWell(
       onTap: () {
-        if (controller.screenName.value == "Check Out") {
+        final screenName = controller.screenName.value;
+        if (screenName == "Check Out" || screenName == "Home") {
+          // Update CheckoutController if available
+          if (Get.isRegistered<CheckoutController>()) {
+            final checkoutController = Get.find<CheckoutController>();
+            checkoutController.selectAddress(address);
+          }
           Get.back(result: address);
         }
       },

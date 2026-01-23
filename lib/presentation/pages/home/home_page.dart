@@ -3,15 +3,22 @@ import 'package:get/get.dart';
 import 'package:grocery_template/presentation/controllers/notification/notification_binding.dart';
 
 import '../../../config/routes/app_routes.dart';
+import '../../../domain/entities/address_entity.dart';
 import '../../../domain/entities/category/category_entity.dart';
 import '../../../domain/entities/product/product_entity.dart';
 import '../../controllers/cart/cart_binding.dart';
 import '../../controllers/cart/cart_controller.dart';
+import '../../controllers/checkout/checkout_controller.dart';
+import '../../controllers/home/home_controller.dart';
 import '../../controllers/notification/notification_controller.dart';
 import '../../controllers/wishlist/wishlist_binding.dart';
 import '../../controllers/wishlist/wishlist_controller.dart';
 import '../../widgets/category/category_card.dart';
 import '../../widgets/product/product_card.dart';
+import '../../widgets/home/skeletons/banner_skeleton.dart';
+import '../../widgets/home/skeletons/category_skeleton.dart';
+import '../../widgets/home/skeletons/home_search_skeleton.dart';
+import '../../widgets/home/skeletons/product_grid_skeleton.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -100,69 +107,15 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _showAddressBottomSheet(BuildContext context) {
-    final theme = Theme.of(context);
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: theme.colorScheme.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 40,
-                height: 4,
-                margin: const EdgeInsets.only(bottom: 16),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.onSurface.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.my_location,
-                  color: theme.colorScheme.primary,
-                ),
-                title: Text(
-                  'Use Current Location',
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    color: theme.colorScheme.onSurface,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  // UI only - no API integration
-                },
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.location_on,
-                  color: theme.colorScheme.primary,
-                ),
-                title: Text(
-                  'Saved Addresses',
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    color: theme.colorScheme.onSurface,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  // UI only - no API integration
-                },
-              ),
-              const SizedBox(height: 8),
-            ],
-          ),
-        ),
-      ),
-    );
+  Future<void> _navigateToAddressSelection() async {
+    // Ensure CheckoutController is available
+    if (!Get.isRegistered<CheckoutController>()) {
+      return;
+    }
+    
+    final AddressEntity address = await Get.toNamed(AppRoutes.address, arguments: "Home");
+    final checkoutController = Get.find<CheckoutController>();
+    checkoutController.selectAddress(address);
   }
 
   @override
@@ -196,29 +149,60 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         title: InkWell(
-          onTap: () => _showAddressBottomSheet(context),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                child: Text(
-                  '123 Main Street, City',
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: theme.colorScheme.onSurface,
+          onTap: _navigateToAddressSelection,
+          child: Obx(() {
+            if (!Get.isRegistered<CheckoutController>()) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Text(
+                      'Select Address',
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: theme.colorScheme.onSurface,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                  const SizedBox(width: 4),
+                  Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 20,
+                    color: theme.colorScheme.onSurface.withOpacity(0.6),
+                  ),
+                ],
+              );
+            }
+            
+            final checkoutController = Get.find<CheckoutController>();
+            final selectedAddress = checkoutController.selectedAddress.value;
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Flexible(
+                  child: Text(
+                    selectedAddress != null 
+                        ? selectedAddress.fullAddress
+                        : 'Select Address',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: theme.colorScheme.onSurface,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 4),
-              Icon(
-                Icons.keyboard_arrow_down,
-                size: 20,
-                color: theme.colorScheme.onSurface.withOpacity(0.6),
-              ),
-            ],
-          ),
+                const SizedBox(width: 4),
+                Icon(
+                  Icons.keyboard_arrow_down,
+                  size: 20,
+                  color: theme.colorScheme.onSurface.withOpacity(0.6),
+                ),
+              ],
+            );
+          }),
         ),
         backgroundColor: theme.colorScheme.surface,
         elevation: 0,
@@ -345,191 +329,215 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Search Bar
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: InkWell(
-                  onTap: () => Get.toNamed(AppRoutes.search),
-                  borderRadius: BorderRadius.circular(12),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.3),
+        child: Obx(() {
+          // HomeController is always available via HomeBinding
+          final homeController = Get.find<HomeController>();
+          final isLoading = homeController.isLoading.value;
+
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Search Bar
+                if (isLoading)
+                  const HomeSearchSkeleton()
+                else
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: InkWell(
+                      onTap: () => Get.toNamed(AppRoutes.search),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: theme.colorScheme.outline.withOpacity(0.2)),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: theme.colorScheme.outline.withOpacity(0.2)),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.search, color: theme.colorScheme.onSurface.withOpacity(0.6)),
+                            const SizedBox(width: 12),
+                            Text('Search for products...', style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.6))),
+                          ],
+                        ),
+                      ),
                     ),
+                  ),
+
+                // Category Horizontal List
+                if (isLoading)
+                  const CategoriesSkeleton()
+                else ...[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, bottom: 8),
+                    child: Text(
+                      'Categories',
+                      style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 120,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: _categories.length,
+                      itemBuilder: (context, index) {
+                        final category = _categories[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 12),
+                          child: SizedBox(
+                            width: 90,
+                            child: CategoryCard(
+                              category: category,
+                              icon: _getCategoryIcon(category.name),
+                              onTap: () => Get.toNamed(AppRoutes.category),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+
+                const SizedBox(height: 24),
+
+                // Promotional Banner Card
+                if (isLoading)
+                  const BannerSkeleton()
+                else
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Container(
+                      height: 130,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            theme.colorScheme.primary,
+                            theme.colorScheme.primaryContainer,
+                          ],
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Special Offer',
+                              style: theme.textTheme.headlineSmall?.copyWith(
+                                color: theme.colorScheme.onPrimary,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              'Get 20% off on your first order!',
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: theme.colorScheme.onPrimary.withOpacity(0.85),
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                const SizedBox(height: 24),
+
+                // Best Selling Section
+                if (isLoading)
+                  const ProductGridSkeleton(sectionTitle: 'Best Selling')
+                else ...[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Row(
-                      children: [
-                        Icon(Icons.search, color: theme.colorScheme.onSurface.withOpacity(0.6)),
-                        const SizedBox(width: 12),
-                        Text('Search for products...', style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.6))),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-
-              // Category Horizontal List
-              Padding(
-                padding: const EdgeInsets.only(left: 16, bottom: 8),
-                child: Text(
-                  'Categories',
-                  style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
-                ),
-              ),
-              SizedBox(
-                height: 120,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  itemCount: _categories.length,
-                  itemBuilder: (context, index) {
-                    final category = _categories[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: SizedBox(
-                        width: 90,
-                        child: CategoryCard(
-                          category: category,
-                          icon: _getCategoryIcon(category.name),
-                          onTap: () => Get.toNamed(AppRoutes.category),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-
-              const SizedBox(height: 24),
-
-              // Promotional Banner Card
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Container(
-                  height: 130,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        theme.colorScheme.primary,
-                        theme.colorScheme.primaryContainer,
-                      ],
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Special Offer',
-                          style: theme.textTheme.headlineSmall?.copyWith(
-                            color: theme.colorScheme.onPrimary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
-                          ),
+                          'Best Selling',
+                          style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
                         ),
-                        const SizedBox(height: 6),
-                        Text(
-                          'Get 20% off on your first order!',
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: theme.colorScheme.onPrimary.withOpacity(0.85),
-                            fontWeight: FontWeight.w400,
+                        TextButton(
+                          onPressed: () => Get.toNamed(AppRoutes.productList),
+                          child: Text(
+                            'See All',
+                            style: TextStyle(color: theme.colorScheme.primary, fontWeight: FontWeight.w600),
                           ),
                         ),
                       ],
                     ),
                   ),
-                ),
-              ),
-
-              const SizedBox(height: 24),
-
-              // Best Selling Section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Best Selling',
-                      style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    height: 240,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: _bestSellingProducts.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 12),
+                          child: SizedBox(width: 160, child: ProductCard(product: _bestSellingProducts[index])),
+                        );
+                      },
                     ),
-                    TextButton(
-                      onPressed: () => Get.toNamed(AppRoutes.productList),
-                      child: Text(
-                        'See All',
-                        style: TextStyle(color: theme.colorScheme.primary, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 12),
-              SizedBox(
-                height: 240,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  itemCount: _bestSellingProducts.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: SizedBox(width: 160, child: ProductCard(product: _bestSellingProducts[index])),
-                    );
-                  },
-                ),
-              ),
+                  ),
+                ],
 
-              const SizedBox(height: 32),
+                const SizedBox(height: 32),
 
-              // Fresh for You Section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Fresh for You',
-                      style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
+                // Fresh for You Section
+                if (isLoading)
+                  const ProductGridSkeleton(sectionTitle: 'Fresh for You')
+                else ...[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Fresh for You',
+                          style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface),
+                        ),
+                        TextButton(
+                          onPressed: () => Get.toNamed(AppRoutes.productList),
+                          child: Text(
+                            'See All',
+                            style: TextStyle(color: theme.colorScheme.primary, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ],
                     ),
-                    TextButton(
-                      onPressed: () => Get.toNamed(AppRoutes.productList),
-                      child: Text(
-                        'See All',
-                        style: TextStyle(color: theme.colorScheme.primary, fontWeight: FontWeight.w600),
-                      ),
+                  ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    height: 240,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: _freshProducts.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 12),
+                          child: SizedBox(width: 160, child: ProductCard(product: _freshProducts[index])),
+                        );
+                      },
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 12),
-              SizedBox(
-                height: 240,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  itemCount: _freshProducts.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: SizedBox(width: 160, child: ProductCard(product: _freshProducts[index])),
-                    );
-                  },
-                ),
-              ),
+                  ),
+                ],
 
-              const SizedBox(height: 80), // Space for bottom navigation
-            ],
-          ),
-        ),
+                const SizedBox(height: 80), // Space for bottom navigation
+              ],
+            ),
+          );
+        }),
       ),
       bottomNavigationBar: Obx(() {
         final cartController = Get.find<CartController>();

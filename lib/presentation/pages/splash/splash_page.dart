@@ -32,7 +32,7 @@ class _SplashPageState extends State<SplashPage> {
 
   void _navigateToHome() {
     Future.delayed(const Duration(seconds: 2), () {
-      Get.offNamed(AppRoutes.onboarding);
+      Get.offNamed(AppRoutes.home);
     });
   }
 

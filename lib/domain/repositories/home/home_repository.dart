@@ -1,6 +1,6 @@
 import '../../entities/banner_entity.dart';
-import '../../entities/category_entity.dart';
-import '../../entities/product_entity.dart';
+import '../../entities/category/category_entity.dart';
+import '../../entities/product/product_entity.dart';
 
 class HomeDataBundle {
   final List<BannerEntity> banners;

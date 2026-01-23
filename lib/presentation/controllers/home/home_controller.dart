@@ -1,15 +1,18 @@
 import 'package:get/get.dart';
 
+import '../../../domain/entities/banner_entity.dart';
+import '../../../domain/entities/category/category_entity.dart';
+import '../../../domain/entities/product/product_entity.dart';
 import '../../../domain/usecases/home/get_home_data.dart';
 
 class HomeController extends GetxController {
   final GetHomeData getHomeData;
 
-  var banners = [].obs;
-  var categories = [].obs;
-  var products = [].obs;
+  final RxList<BannerEntity> banners = <BannerEntity>[].obs;
+  final RxList<CategoryEntity> categories = <CategoryEntity>[].obs;
+  final RxList<ProductEntity> products = <ProductEntity>[].obs;
 
-  var isLoading = false.obs;
+  final RxBool isLoading = false.obs;
 
   HomeController(this.getHomeData);
 
@@ -20,11 +23,14 @@ class HomeController extends GetxController {
   }
 
   Future<void> loadData() async {
-    isLoading(true);
-    final result = await getHomeData();
-    banners.assignAll(result.banners);
-    categories.assignAll(result.categories);
-    products.assignAll(result.products);
-    isLoading(false);
+    isLoading.value = true;
+    try {
+      final result = await getHomeData();
+      banners.value = result.banners;
+      categories.value = result.categories;
+      products.value = result.products;
+    } finally {
+      isLoading.value = false;
+    }
   }
 }

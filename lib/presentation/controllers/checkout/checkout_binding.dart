@@ -16,6 +16,6 @@ class CheckoutBinding extends Bindings {
     if (!Get.isRegistered<ProfileController>()) {
       ProfileBinding().dependencies();
     }
-    Get.lazyPut(() => CheckoutController());
+    Get.lazyPut(() => CheckoutController(), fenix: true);
   }
 }
